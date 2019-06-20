@@ -8,7 +8,7 @@ module.exports = async Authentication => {
 
   rootRequire('common/authentication/checkPendingStatus')(
     Authentication);
-  rootRequire('common/authentication/checkTemporarySuspndedStatus')(
+  rootRequire('common/authentication/checkSuspndedStatus')(
     Authentication);
   rootRequire('common/authentication/checkVerifiedStatus')(
     Authentication);
