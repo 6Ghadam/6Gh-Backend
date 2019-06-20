@@ -11,7 +11,7 @@ module.exports = async Authentication => {
     let time = utility.getUnixTimeStamp();
     let authList = await Authentication.find({
       where: {
-        status: vars.config.verificationStatus.suspendedTemporary
+        status: vars.config.verificationStatus.temporarySuspended
       }
     });
     for (let i = 0; i < authList.length; i++) {
