@@ -8,5 +8,7 @@ module.exports = async Client => {
 
   rootRequire('common/client/resolveAccessToken')(
     Client);
+  rootRequire('common/client/createGuestClient')(
+    Client);
 
 };
