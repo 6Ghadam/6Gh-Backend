@@ -1,0 +1,43 @@
+{
+  "name": "authentication",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "hidden": [
+    "password"
+  ],
+  "properties": {
+    "mobileNumber": {
+      "type": "string",
+      "required": true
+    },
+    "ttl": {
+      "type": "number",
+      "required": false,
+      "default": 600000
+    },
+    "tryCount": {
+      "type": "number",
+      "required": false,
+      "default": 5
+    },
+    "password": {
+      "type": "string",
+      "required": false
+    },
+    "date": {
+      "type": "number",
+      "required": false
+    },
+    "status": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
