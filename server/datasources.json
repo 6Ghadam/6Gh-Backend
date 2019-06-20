@@ -1,1 +1,15 @@
-{}
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mongoDs": {
+    "host": "localhost",
+    "port": 27017,
+    "url": "",
+    "database": "6GhadamDB",
+    "name": "mongoDs",
+    "maxRows": 99999,
+    "connector": "mongodb"
+  }
+}

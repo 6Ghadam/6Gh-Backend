@@ -1,1 +1,17 @@
-{}
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mongoDs": {
+    "host": "${MONGO_6GHDB_HOST}",
+    "username": "${MONGO_6GHDB_USERNAME}",
+    "password": "${MONGO_6GHDB_PASSWORD}",
+    "port": "${MONGO_6GHDB_PORT}",
+    "url": "${MONGO_6GHDB_URL}",
+    "database": "${MONGO_6GHDB_DATABASE}",
+    "name": "mongoDs",
+    "maxRows": 99999,
+    "connector": "mongodb"
+  }
+}
