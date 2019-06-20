@@ -1,4 +1,10 @@
+let app = require('../../server/server');
+
 module.exports = async Authentication => {
+
+  Authentication.validatesInclusionOf('status', {
+    in: Object.values(app.vars.config.verificationStatus),
+  });
 
   rootRequire('common/authentication/checkPendingStatus')(
     Authentication);
