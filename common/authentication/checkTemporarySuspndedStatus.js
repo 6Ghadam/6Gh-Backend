@@ -7,7 +7,7 @@ module.exports = async Authentication => {
 
   const vars = app.vars;
 
-  let checkTemporarySuspndStatus = cron.job('*/10 * * * * *', async () => {
+  let checkTemporarySuspndedStatus = cron.job('*/10 * * * * *', async () => {
     let time = utility.getUnixTimeStamp();
     let authList = await Authentication.find({
       where: {
@@ -27,6 +27,6 @@ module.exports = async Authentication => {
     }
   });
 
-  checkTemporarySuspndStatus.start();
+  checkTemporarySuspndedStatus.start();
   
 };
