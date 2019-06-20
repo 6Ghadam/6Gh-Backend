@@ -39,5 +39,9 @@
   "authentication": {
     "dataSource": "mongoDs",
     "public": true
+  },
+  "client": {
+    "dataSource": "mongoDs",
+    "public": true
   }
 }

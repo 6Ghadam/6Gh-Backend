@@ -1,0 +1,36 @@
+{
+  "name": "client",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "realmRequired": true,
+    "realmDelimiter": ":"
+  },
+  "properties": {
+    "username": {
+      "type": "string",
+      "required": false
+    },
+    "email": {
+      "type": "string",
+      "required": false
+    },
+    "password": {
+      "type": "string",
+      "required": false
+    },
+    "ipAddress": {
+      "type": "string",
+      "required": false
+    },
+    "status": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
