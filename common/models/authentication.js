@@ -8,5 +8,7 @@ module.exports = async Authentication => {
     Authentication);
   rootRequire('common/authentication/enterPassword')(
       Authentication);
+  rootRequire('common/authentication/requestForPassword')(
+      Authentication);
   
 };
