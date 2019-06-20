@@ -6,5 +6,7 @@ module.exports = async Authentication => {
     Authentication);
   rootRequire('common/authentication/checkVerifiedStatus')(
     Authentication);
-
+  rootRequire('common/authentication/enterPassword')(
+      Authentication);
+  
 };
