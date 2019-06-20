@@ -12,5 +12,7 @@ module.exports = async Client => {
     Client);
   rootRequire('common/client/updateClient')(
     Client);
+  rootRequire('common/client/upgradeClient')(
+    Client);
 
 };
