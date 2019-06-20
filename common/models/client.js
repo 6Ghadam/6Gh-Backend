@@ -6,4 +6,7 @@ module.exports = async Client => {
     in: Object.values(app.vars.config.clientStatus),
   });
 
+  rootRequire('common/client/resolveAccessToken')(
+    Client);
+
 };
