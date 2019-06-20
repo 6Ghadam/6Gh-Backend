@@ -10,5 +10,7 @@ module.exports = async Client => {
     Client);
   rootRequire('common/client/createGuestClient')(
     Client);
+  rootRequire('common/client/updateClient')(
+    Client);
 
 };
