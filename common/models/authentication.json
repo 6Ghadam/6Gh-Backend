@@ -8,6 +8,9 @@
   "hidden": [
     "password"
   ],
+  "mixins": {
+    "Fetcher": {}
+  },
   "properties": {
     "mobileNumber": {
       "type": "string",
