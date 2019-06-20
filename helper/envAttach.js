@@ -5,6 +5,8 @@ module.exports = server => {
     config: {
       verificationStatus
     },
-    const: {}
+    const: {
+      authenticationTryCount: 5
+    }
   };
 };

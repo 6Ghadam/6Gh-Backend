@@ -40,7 +40,7 @@ module.exports = async Authentication => {
     let expireDate = Number(model.date) + Number(model.ttl);
     if (time > expireDate) {
       let data = {
-        tryCount: 5,
+        tryCount: vars.const.authenticationTryCount,
         date: time,
         status: vars.config.verificationStatus.ready
       };
