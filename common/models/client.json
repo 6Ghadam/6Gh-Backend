@@ -12,7 +12,8 @@
     "emailVerified"
   ],
   "mixins": {
-    "Fetcher": {}
+    "Fetcher": {},
+    "Clearer": true
   },
   "properties": {
     "username": {
@@ -43,6 +44,7 @@
   },
   "validations": [],
   "relations": {},
-  "acls": [],
+  "acls": [
+  ],
   "methods": {}
 }
