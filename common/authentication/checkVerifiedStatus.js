@@ -14,7 +14,7 @@ module.exports = async Authentication => {
     // Get the current timestamp for further checking
     let time = utility.getUnixTimeStamp();
     // Fetch list of all the Verified status authentication models
-    let authList = await Authentication.find({
+    let authList = await Authentication.fetchModelsWithNullOption({
       where: {
         status: vars.config.verificationStatus.verified
       }
@@ -23,7 +23,8 @@ module.exports = async Authentication => {
     for (let i = 0; i < authList.length; i++) {
       let model = authList[i];
       // Check if authenticationVerifiedTime time of each model is passed from its owner's last attempt
-      if (Number(model.date) + vars.const.authenticationVerifiedTime < time) {
+      if (Number(model.date) + 
+          Number(vars.const.authenticationVerifiedTime) < time) {
         // Refresh the data for this model to give its owner ability to attempt
         let data = {
           tryCount: vars.const.authenticationTryCount,
