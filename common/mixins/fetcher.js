@@ -5,8 +5,8 @@ const createError = require('http-errors');
 module.exports = Model => {
 
   /**
-  * @function	Function Fetch a model by provided identifier and throw 
-  *                    error if it was not found
+  * @function	fetchModel Fetch a model by provided identifier and throw 
+  *                      error if it was not found
   * @param  {String} id The model identifier to fetch
   */
   Model.fetchModel = async id => {
@@ -22,7 +22,7 @@ module.exports = Model => {
     utility.wrapper(Model.fetchModel);
 
   /**
-  * @function	Function Fetch a model by provided identifier
+  * @function	fetchModelWithNullOption Fetch a model by provided identifier
   * @param  {String} id The model identifier to fetch
   */
  Model.fetchModelWithNullOption = async id => {
@@ -35,8 +35,8 @@ module.exports = Model => {
     utility.wrapper(Model.fetchModelWithNullOption);
 
   /**
-  * @function	Function Fetch models list by provided filter and throw 
-  *                    error if there was not found any
+  * @function	fetchModels Fetch models list by provided filter and throw 
+  *                       error if there was not found any
   * @param  {String} filter The filter to fetch
   */
  Model.fetchModels = async filter => {
@@ -52,7 +52,7 @@ module.exports = Model => {
     utility.wrapper(Model.fetchModels);
 
   /**
-  * @function	Function Fetch models list by provided filter
+  * @function	fetchModelsWithNullOption Fetch models list by provided filter
   * @param  {String} filter The filter to fetch
   */
  Model.fetchModelsWithNullOption = async filter => {
