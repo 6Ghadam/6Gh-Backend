@@ -27,13 +27,18 @@
       "type": "string",
       "required": false
     },
-    "ipAddress": {
+    "clientAppId": {
       "type": "string",
       "required": false
     },
-    "status": {
+    "type": {
       "type": "string",
       "required": true
+    },
+    "isSuspended": {
+      "type": "string",
+      "required": true,
+      "default": "False"
     }
   },
   "validations": [],
