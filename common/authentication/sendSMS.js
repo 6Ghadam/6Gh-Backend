@@ -16,7 +16,7 @@ module.exports = async Authentication => {
   function getRequest(url) {
     // Create a promise to handle the resolve and reject operation
 		return new Promise((resolve, reject) => {
-      request.get(url).on('data', data => 
+      request.get(url).on('response', data =>
         resolve(data)
       ).on('error', err =>
         reject(err)
@@ -38,6 +38,9 @@ module.exports = async Authentication => {
 			token: randNumber.toString(),
 			template: vars.const.authenticationTemplate
     };
+    if (process.env.NODE_ENV !== vars.config.nodeEnvironment.production) {
+      return data;
+    }
     // Prepare the request query string
     let url = apiURL + '?' + utility.generateQueryString(data);
     // Send the HTTP GET request to the kavenegar api
