@@ -10,6 +10,8 @@ module.exports = async Client => {
     Client);
   rootRequire('common/client/fetchClient')(
     Client);
+  rootRequire('common/client/generateRandomId')(
+    Client);
   rootRequire('common/client/resolveAccessToken')(
     Client);
   rootRequire('common/client/suspendClient')(
