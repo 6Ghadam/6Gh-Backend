@@ -4,54 +4,53 @@ const utility = rootRequire('helper/utility');
 let app = rootRequire('server/server');
 
 module.exports = Client => {
+
+  // Load the variables from the application server
   const vars = app.vars;
 
   /**
-	 * this remote method function will unsuspend a client
-   * based on the provided mobile number.
+	 * @function unsuspendClient Unsuspend a client
+   * @param {String} clientId String of user's identifier
+   * @returns {Object} Returns the unsuspended client in case of successful operation
+   * @throws {Error} Throws error if anything happened
 	 */
-  Client.unsuspendClient = async mobileNumber => {
-    let authentication = Client.app.models.authentication;
-    // fetch list of all authentication models by the provided mobileNumber.
-    let model = await authentication.findOne({
-      where: {
-        mobileNumber: mobileNumber.toString()
-      }
+  Client.unsuspendClient = async clientId => {
+    // Fetch the client model based on the provided clientId
+    let clientModel = await Client.fetchModel(clientId.toString());
+    // Unsuspension will work only for non-guest clients
+    if (clientModel.type === vars.config.clientType.guest) {
+      throw createError(403);
+    }
+    // update client status to permanent suspend
+    clientModel = await clientModel.updateAttribute({
+      isSuspended: vars.config.suspensionStatus.false
     });
-    if (!model) { throw createError(404); }
-    // ready-status model data will be like bellow:
-    let data = {
-      tryCount: vars.const.tryCount,
-      date: utility.getUnixTimeStamp(),
-      status: vars.config.verificationStatus.ready
-    };
-    // update authentication model to make it ready again.
-    await model.updateAttributes(data);
-    return { status: vars.config.verificationStatus.ready };
+    return clientModel;
   };
 
-  Client.unsuspendClient = utility.wrapper(Client.unsuspendClient);
+  // Wrapp the function inside the Try/Catch
+  Client.unsuspendClient = 
+    utility.wrapper(Client.unsuspendClient);
 
   /**
   * remote method signiture for unsuspending a client
-  * based on the provided mobile number.
+  * based on the provided clientId.
   */
   Client.remoteMethod('unsuspendClient', {
     description:
-      'unsuspend a client from accessing to endpoints with its mobile number',
-    accepts: [
-      {
-        arg: 'mobileNumber',
-        type: 'string',
-        required: true,
-        http: {
-          source: 'path'
-        }
+      'Unsuspend a client from accessing \
+      to endpoints with its clientId',
+    accepts: [{
+      arg: 'clientId',
+      type: 'string',
+      required: true,
+      http: {
+        source: 'path'
       }
-    ],
+    }],
     http: {
-      path: '/unsuspendClient/:mobileNumber',
-      verb: 'POST',
+      path: '/:clientId/unsuspendClient',
+      verb: 'PUT',
       status: 200,
       errorStatus: 400
     },
