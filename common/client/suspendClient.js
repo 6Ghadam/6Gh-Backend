@@ -10,35 +10,33 @@ module.exports = Client => {
   const vars = app.vars;
 
   /**
-	 * @function suspendClient Suspend a client either temporary or permanantly
+	 * @function suspendClient Suspend a client either temporary or permanently
    * @param {String} clientId String of user's identifier
-	 * @param {Boolean} isPermanantly Flag of suspension level
+	 * @param {Boolean} isPermanently Flag of suspension level
    * @returns {Object} Returns the suspended client in case of successful operation
    * @throws {Error} Throws error if anything happened
 	 */
-  Client.suspendClient = async (clientId, isPermanantly) => {
+  Client.suspendClient = async (clientId, isPermanently) => {
     // Fetch the client model based on the provided clientId
     let clientModel = await Client.fetchModel(clientId.toString());
     // Suspension will work only for non-guest clients
     if (clientModel.type === vars.config.clientType.guest) {
       throw createError(403);
     }
-    // Find the suspension status based on the isPermanantly flag
-    let suspensionStatus = vars.config.suspensionStatus.permanantSuspended;
-    if (!isPermanantly) {
+    // Find the suspension status based on the isPermanently flag
+    let suspensionStatus = vars.config.suspensionStatus.permanentSuspended;
+    if (!isPermanently) {
       suspensionStatus = vars.config.suspensionStatus.temporarySuspended;
     }
     // update client status to permanent suspend
-    clientModel = await clientModel.updateAttribute({
+    clientModel = await clientModel.updateAttributes({
       isSuspended: suspensionStatus
     });
     // Load AccessToken model
-    let AccessToken = Client.app.models;
+    let AccessToken = Client.app.models.AccessToken;
     // Remove all related access token of that particular client.
     await AccessToken.destroyAll({
-      where: {
-          userId: clientModel.id.toString()
-        }
+        userId: clientModel.id.toString()
       }
     );
     return clientModel;
@@ -49,8 +47,8 @@ module.exports = Client => {
     utility.wrapper(Client.suspendClient);
 
 	/**
-	 * remote method signiture for permanantly suspending a client
-   * based on the provided clientId and isPermanantly flag.
+	 * remote method signiture for permanently suspending a client
+   * based on the provided clientId and isPermanently flag.
 	 */
   Client.remoteMethod('suspendClient', {
     description:
@@ -65,7 +63,7 @@ module.exports = Client => {
       }
     },
     {
-      arg: 'isPermanantly',
+      arg: 'isPermanently',
       type: 'boolean',
       required: true,
       http: {
