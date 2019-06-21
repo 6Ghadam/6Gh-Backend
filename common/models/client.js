@@ -2,8 +2,8 @@ let app = rootRequire('server/server');
 
 module.exports = async Client => {
 
-  Client.validatesInclusionOf('status', {
-    in: Object.values(app.vars.config.clientStatus),
+  Client.validatesInclusionOf('type', {
+    in: Object.values(app.vars.config.clientType),
   });
 
   rootRequire('common/client/createGuestClient')(
