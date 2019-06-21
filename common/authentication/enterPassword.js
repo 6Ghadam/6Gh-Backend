@@ -51,6 +51,7 @@ module.exports = async Authentication => {
           clientModel.type === vars.config.clientType.completed)) {
         // Login user and return successful object to caller.
         let loginResult = await Client.login({
+          realm: vars.const.userRealm,
           username: clientModel.username.toString(),
           password: clientModel.username.toString()
         });
@@ -92,7 +93,9 @@ module.exports = async Authentication => {
     if (password.toString() !== model.password.toString()) {
       // Update the authentication model with decreased tryCount
       // and throw error
-      await model.updateAttribute('tryCount', newTryCount);
+      await model.updateAttributes({
+        tryCount: newTryCount
+      });
       throw createError(401);
     }
     else {
@@ -119,6 +122,7 @@ module.exports = async Authentication => {
       await model.updateAttributes(data);
       // Login the user via the provided mobile umber
       let loginResult = await Client.login({
+        realm: vars.const.userRealm,
         username: mobileNumber.toString(),
         password: mobileNumber.toString()
       });

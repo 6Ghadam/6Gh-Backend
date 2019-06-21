@@ -22,7 +22,7 @@ module.exports = Client => {
       throw createError(403);
     }
     // update client status to permanent suspend
-    clientModel = await clientModel.updateAttribute({
+    clientModel = await clientModel.updateAttributes({
       isSuspended: vars.config.suspensionStatus.false
     });
     return clientModel;

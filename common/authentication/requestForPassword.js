@@ -66,6 +66,7 @@ module.exports = async Authentication => {
             clientModel.type === vars.config.clientType.completed)) {
           // Login user and return successful object to caller.
           let loginResult = await Client.login({
+            realm: vars.const.userRealm,
             username: clientModel.username.toString(),
             password: clientModel.username.toString()
           });

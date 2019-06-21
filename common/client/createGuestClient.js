@@ -51,6 +51,7 @@ module.exports = Client => {
     }
     // Login user and return successful object to caller.
     let loginResult = await Client.login({
+      realm: vars.const.userRealm,
       username: credentialFactor.toString(),
       password: credentialFactor.toString()
     });
