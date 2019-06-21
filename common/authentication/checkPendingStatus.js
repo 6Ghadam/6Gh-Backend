@@ -14,7 +14,7 @@ module.exports = async Authentication => {
     // Get the current timestamp for further checking
     let time = utility.getUnixTimeStamp();
     // Fetch list of all the pending status authentication models
-    let authList = await Authentication.find({
+    let authList = await Authentication.fetchModelsWithNullOption({
       where: {
         status: vars.config.verificationStatus.pending
       }
