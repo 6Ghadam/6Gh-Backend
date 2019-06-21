@@ -1,60 +1,61 @@
-const createError = require('http-errors');
-
 const utility = rootRequire('helper/utility');
 
 let app = rootRequire('server/server');
 
 module.exports = Client => {
 
+  // Load the variables from the application server
 	const vars = app.vars;
   
   /**
-	 * @func	 Function - update a client
-   * @param  {String} clientId - {clientId string}
-	 * @param  {Object} data - {object}
+	 * @function updateClient Update a client to a higher level
+   * @param {String} clientId String of user's identifier
+	 * @param {String} mobileNumber String of user's mobileNumber
+   * @returns {Object} Returns the updated client in case of successful operation
+   * @throws {Error} Throws error if anything happened
 	 */
-	Client.updateClient = async (clientId, data) => {
-		// fetch a client based on the provided client identifier.
-		let fetchedClient = await Client.findById(clientId);
-		// send 404 Http status code if there was no client model.
-		if (!fetchedClient) { throw createError(404); }
-		// attach default status to input data to say it is not completed yet.
-		data.status = vars.config.clientStatus.default;
-		data.realm = 'User';
-		// update client by the provided data and return successful object to caller.
-		let updatedClient = await fetchedClient.updateAttributes(data);
-		if (!updatedClient) { throw createError(404); }
-		return updatedClient;
+	Client.updateClient = async (clientId, mobileNumber) => {
+    // Fetch the client model based on the provided clientId
+    let clientModel = await Client.fetchModel(clientId.toString());
+    // Prepare the data for the updating the client model
+    let data = {
+      type: vars.config.clientType.default,
+      username: mobileNumber.toString(),
+      email: mobileNumber.toString() + vars.const.domainName,
+      password: mobileNumber.toString()
+    };
+    // update the client model based on the provided data
+    clientModel = await clientModel.updateAttributes(data);
+    return clientModel;
 	};
 
-	Client.updateClient = utility.wrapper(Client.updateClient);
+  // Wrapp the function inside the Try/Catch
+  Client.updateClient = 
+    utility.wrapper(Client.updateClient);
 
 	/**
 	 * remote method signiture for update a client model
-   * with provided data
+   * with provided mobileNumber
 	 */
   Client.remoteMethod('updateClient', {
     description:
       'update a particular client with provided data',
-    accepts: [
-      {
-        arg: 'clientId',
-        type: 'string',
-        required: true,
-        http: {
-          source: 'path'
-        }
-			},
-      {
-        arg: 'data',
-        type: 'object',
-        http: {
-          source: 'body'
-        }
+    accepts: [{
+      arg: 'clientId',
+      type: 'string',
+      required: true,
+      http: {
+        source: 'path'
       }
-    ],
+    }, {
+      arg: 'mobileNumber',
+      type: 'string',
+      http: {
+        source: 'query'
+      }
+    }],
     http: {
-      path: '/updateClient/:clientId',
+      path: '/:clientId/updateClient',
       verb: 'PUT',
       status: 200,
       errorStatus: 400
