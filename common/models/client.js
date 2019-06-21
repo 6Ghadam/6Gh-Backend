@@ -1,4 +1,4 @@
-let app = require('../../server/server');
+let app = rootRequire('server/server');
 
 module.exports = async Client => {
 
@@ -6,9 +6,11 @@ module.exports = async Client => {
     in: Object.values(app.vars.config.clientStatus),
   });
 
-  rootRequire('common/client/resolveAccessToken')(
-    Client);
   rootRequire('common/client/createGuestClient')(
+    Client);
+  rootRequire('common/client/fetchClient')(
+    Client);
+  rootRequire('common/client/resolveAccessToken')(
     Client);
   rootRequire('common/client/suspendClient')(
     Client);

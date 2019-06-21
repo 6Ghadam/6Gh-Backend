@@ -1,4 +1,4 @@
-let app = require('../../server/server');
+let app = rootRequire('server/server');
 
 module.exports = async Authentication => {
 
@@ -13,10 +13,10 @@ module.exports = async Authentication => {
   rootRequire('common/authentication/checkVerifiedStatus')(
     Authentication);
   rootRequire('common/authentication/enterPassword')(
-      Authentication);
+    Authentication);
   rootRequire('common/authentication/requestForPassword')(
-      Authentication);
+    Authentication);
   rootRequire('common/authentication/sendSMS')(
-      Authentication);
+    Authentication);
   
 };
