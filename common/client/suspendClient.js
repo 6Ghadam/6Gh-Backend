@@ -1,6 +1,6 @@
-const createError = require('http-errors');
-
 const utility = rootRequire('helper/utility');
+
+const createError = require('http-errors');
 
 let app = rootRequire('server/server');
 

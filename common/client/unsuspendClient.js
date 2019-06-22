@@ -1,6 +1,7 @@
+const utility = rootRequire('helper/utility');
+
 const createError = require('http-errors');
 
-const utility = rootRequire('helper/utility');
 let app = rootRequire('server/server');
 
 module.exports = Client => {
