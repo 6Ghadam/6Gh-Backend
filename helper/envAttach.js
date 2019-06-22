@@ -1,9 +1,11 @@
+const adminType = rootRequire('config/admin.type.js');
 const clientType = rootRequire('config/client.type.js');
 const nodeEnvironment = rootRequire('config/node.environment.js');
 const suspensionStatus = rootRequire('config/suspension.status.js');
 const verificationStatus = rootRequire('config/verification.status.js');
 
 const userRealm = 'User';
+const adminRealm = 'Admin';
 const domainName = '@6ghadam.com';
 const authenticationTryCount = 5;
 const authenticationAttemptsThresholdTime = 60 * 1000;
@@ -16,6 +18,7 @@ const authenticationTemplate = 'VerificationNo1';
 module.exports = server => {
   server.vars = {
     config: {
+      adminType,
       clientType,
       nodeEnvironment,
       suspensionStatus,
@@ -23,6 +26,7 @@ module.exports = server => {
     },
     const: {
       userRealm,
+      adminRealm,
       domainName,
       authenticationTryCount,
       authenticationAttemptsThresholdTime,
