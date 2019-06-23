@@ -5,6 +5,10 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "Fetcher": {},
+    "Clearer": true
+  },
   "properties": {
     "followerId": {
       "type": "string",
