@@ -5,7 +5,57 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "mixins": {
+    "Fetcher": {},
+    "Clearer": true
+  },
+  "properties": {
+    "coins": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "bills": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "guestCreateDate": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "defaultCreateDate": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "completedCreateDate": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "totalScores": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "lastDurationalScore": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "lastScoreLevel": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "lastLevelUpDate": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    }
+  },
   "validations": [],
   "relations": {},
   "acls": [],
