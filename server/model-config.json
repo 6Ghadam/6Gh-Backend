@@ -55,5 +55,9 @@
   "friendship": {
     "dataSource": "mongoDs",
     "public": true
+  },
+  "profile": {
+    "dataSource": "mongoDs",
+    "public": true
   }
 }
