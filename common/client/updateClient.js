@@ -17,6 +17,10 @@ module.exports = Client => {
 	Client.updateClient = async (clientId, mobileNumber) => {
     // Fetch the client model based on the provided clientId
     let clientModel = await Client.fetchModel(clientId.toString());
+    // Update default profile creation date in client's profile
+    await clientModel.profile.update({
+      defaultCreateDate: utility.getUnixTimeStamp()
+    });
     // Prepare the data for the updating the client model
     let data = {
       type: vars.config.clientType.default,
@@ -24,7 +28,7 @@ module.exports = Client => {
       email: mobileNumber.toString() + vars.const.domainName,
       password: mobileNumber.toString()
     };
-    // update the client model based on the provided data
+    // Update the client model based on the provided data
     clientModel = await clientModel.updateAttributes(data);
     return clientModel;
 	};
@@ -39,7 +43,7 @@ module.exports = Client => {
 	 */
   Client.remoteMethod('updateClient', {
     description:
-      'update a particular client with provided data',
+      'Update a particular client with provided data',
     accepts: [{
       arg: 'clientId',
       type: 'string',

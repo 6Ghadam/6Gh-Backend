@@ -1,9 +1,13 @@
 {
   "name": "friendship",
-  "base": "PersistedModel",
+  "base": "Model",
   "idInjection": true,
   "options": {
     "validateUpsert": true
+  },
+  "mixins": {
+    "Fetcher": {},
+    "Clearer": true
   },
   "properties": {
     "followerId": {
@@ -20,7 +24,18 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "follower": {
+      "type": "belongsTo",
+      "model": "client",
+      "foreignKey": "followerId"
+    },
+    "following": {
+      "type": "belongsTo",
+      "model": "client",
+      "foreignKey": "followingId"
+    }
+  },
   "acls": [],
   "methods": {}
 }

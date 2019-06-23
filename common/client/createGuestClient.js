@@ -24,6 +24,18 @@ module.exports = Client => {
     // Create user if there was not any client model related to this clientAppId
     if (clientList.length === 0) {
       credentialFactor = clientAppId.toString();
+      // Prepare the data for creating the profile model
+      let profileData = {
+        coins: vars.config.inputType.zeroNumber,
+        bills: vars.config.inputType.zeroNumber,
+        guestCreateDate: utility.getUnixTimeStamp(),
+        defaultCreateDate: vars.config.inputType.zeroNumber,
+        completedCreateDate: vars.config.inputType.zeroNumber,
+        totalScores: vars.config.inputType.zeroNumber,
+        lastDurationalScore: vars.config.inputType.zeroNumber,
+        lastScoreLevel: vars.config.inputType.zeroNumber,
+        lastLevelUpDate: vars.config.inputType.zeroNumber
+      };
       // Attach default type to input data to determine it is not completed yet.
       let data = {
         clientAppId: clientAppId.toString(),
@@ -32,7 +44,8 @@ module.exports = Client => {
         username: clientAppId.toString(),
         email: clientAppId.toString() + vars.const.domainName,
         password: clientAppId.toString(),
-        isSuspended: vars.config.suspensionStatus.false
+        isSuspended: vars.config.suspensionStatus.false,
+        profileModel: profileData
       };
       // Create client by the provided data 
       await Client.create(data);

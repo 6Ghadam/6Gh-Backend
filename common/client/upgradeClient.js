@@ -17,6 +17,10 @@ module.exports = Client => {
 	Client.upgradeClient = async (clientId, data) => {
     // Fetch the client model based on the provided clientId
     let clientModel = await Client.fetchModel(clientId.toString());
+    // Update completed profile creation date in client's profile
+    await clientModel.profile.update({
+      completedCreateDate: utility.getUnixTimeStamp()
+    });
     // Prepare the data for the updating the client model
     data.type = vars.config.clientType.completed;
     // update the client model based on the provided data

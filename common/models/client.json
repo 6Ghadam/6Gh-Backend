@@ -43,7 +43,28 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "profile": {
+      "type": "embedsOne",
+      "model": "profile",
+      "property": "profileModel",
+      "options": {
+        "validate": true,
+        "forceId": true,
+        "persistent": true
+      }
+    },
+    "followers": {
+      "type": "hasMany",
+      "model": "friendship",
+      "foreignKey": "followingId"
+    },
+    "followings": {
+      "type": "hasMany",
+      "model": "friendship",
+      "foreignKey": "followerId"
+    }
+  },
   "acls": [],
   "methods": {}
 }

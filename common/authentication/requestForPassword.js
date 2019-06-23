@@ -17,7 +17,9 @@ module.exports = async Authentication => {
 	 */
   Authentication.requestForPassword = async mobileNumber => {
     // Generate a 6Digit random number and get current timestamp
-    let rand = utility.generateRandomNumber(125000, 999999);
+    let rand = utility.generateRandomNumber(
+      vars.const.authenticationLowerBracketPin, 
+      vars.const.authenticationUpperBracketPin);
     let time = utility.getUnixTimeStamp();
     // Search for clients with provided mobileNumber
     let authList = await Authentication.fetchModelsWithNullOption({
