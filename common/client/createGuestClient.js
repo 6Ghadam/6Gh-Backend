@@ -24,18 +24,6 @@ module.exports = Client => {
     // Create user if there was not any client model related to this clientAppId
     if (clientList.length === 0) {
       credentialFactor = clientAppId.toString();
-      // Attach default type to input data to determine it is not completed yet.
-      let data = {
-        clientAppId: clientAppId.toString(),
-        type: vars.config.clientType.guest,
-        realm: vars.const.userRealm,
-        username: clientAppId.toString(),
-        email: clientAppId.toString() + vars.const.domainName,
-        password: clientAppId.toString(),
-        isSuspended: vars.config.suspensionStatus.false
-      };
-      // Create client by the provided data 
-      let clientModel = await Client.create(data);
       // Prepare the data for creating the profile model
       let profileData = {
         coins: vars.config.inputType.zeroNumber,
@@ -48,8 +36,19 @@ module.exports = Client => {
         lastScoreLevel: vars.config.inputType.zeroNumber,
         lastLevelUpDate: vars.config.inputType.zeroNumber
       };
-      // Create the profile model for this client
-      await clientModel.profile.create(profileData);
+      // Attach default type to input data to determine it is not completed yet.
+      let data = {
+        clientAppId: clientAppId.toString(),
+        type: vars.config.clientType.guest,
+        realm: vars.const.userRealm,
+        username: clientAppId.toString(),
+        email: clientAppId.toString() + vars.const.domainName,
+        password: clientAppId.toString(),
+        isSuspended: vars.config.suspensionStatus.false,
+        profileModel: profileData
+      };
+      // Create client by the provided data 
+      await Client.create(data);
     }
     else {
       // Load the client model from client list
