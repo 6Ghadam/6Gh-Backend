@@ -35,7 +35,21 @@ module.exports = Client => {
         isSuspended: vars.config.suspensionStatus.false
       };
       // Create client by the provided data 
-      await Client.create(data);
+      let clientModel = await Client.create(data);
+      // Prepare the data for creating the profile model
+      let profileData = {
+        coins: vars.config.inputType.zeroNumber,
+        bills: vars.config.inputType.zeroNumber,
+        guestCreateDate: utility.getUnixTimeStamp(),
+        defaultCreateDate: vars.config.inputType.zeroNumber,
+        completedCreateDate: vars.config.inputType.zeroNumber,
+        totalScores: vars.config.inputType.zeroNumber,
+        lastDurationalScore: vars.config.inputType.zeroNumber,
+        lastScoreLevel: vars.config.inputType.zeroNumber,
+        lastLevelUpDate: vars.config.inputType.zeroNumber
+      };
+      // Create the profile model for this client
+      await clientModel.profile.create(profileData);
     }
     else {
       // Load the client model from client list
