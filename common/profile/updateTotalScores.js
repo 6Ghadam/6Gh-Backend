@@ -19,7 +19,7 @@ module.exports = Profile => {
     // Update client's coin by the provided amount and return the model
     let updatedModel = await clientModel.profile.update({
       totalScores: 
-        Number(clientModel.accountModel.totalScores) + Number(amount),
+        Number(clientModel.profileModel.totalScores) + Number(amount),
     });
     return updatedModel;
   };

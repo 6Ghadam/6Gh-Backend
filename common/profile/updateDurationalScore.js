@@ -19,7 +19,7 @@ module.exports = Profile => {
     // Update client's last durational score by the provided amount and return the model
     let updatedModel = await clientModel.profile.update({
       lastDurationalScore: 
-        Number(clientModel.accountModel.lastDurationalScore) + Number(amount),
+        Number(clientModel.profileModel.lastDurationalScore) + Number(amount),
     });
     return updatedModel;
   };

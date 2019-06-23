@@ -19,7 +19,7 @@ module.exports = Profile => {
     // Update client's score level by the provided amount at this moment of time
     let updatedModel = await clientModel.profile.update({
       lastScoreLevel: 
-        Number(clientModel.accountModel.lastScoreLevel) + Number(amount),
+        Number(clientModel.profileModel.lastScoreLevel) + Number(amount),
       lastLevelUpDate: utility.getUnixTimeStamp()
     });
     return updatedModel;

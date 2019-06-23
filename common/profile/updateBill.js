@@ -18,7 +18,7 @@ module.exports = Profile => {
     let clientModel = await Client.fetchModel(clientId.toString());
     // Update client's bill by the provided amount and return the model
     let updatedModel = await clientModel.profile.update({
-      bills: Number(clientModel.accountModel.bills) + Number(amount),
+      bills: Number(clientModel.profileModel.bills) + Number(amount),
     });
     return updatedModel;
   };
