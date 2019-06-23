@@ -16,12 +16,14 @@
   "User": {
     "dataSource": "mongoDs",
     "public": true,
-    "acls": [{
-      "principalType": "ROLE",
-      "principalId": "Founder",
-      "permission": "ALLOW",
-      "property": "*"
-    }]
+    "acls": [
+      {
+        "principalType": "ROLE",
+        "principalId": "Founder",
+        "permission": "ALLOW",
+        "property": "*"
+      }
+    ]
   },
   "AccessToken": {
     "dataSource": "mongoDs",
@@ -47,6 +49,10 @@
     "public": true
   },
   "client": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "friendship": {
     "dataSource": "mongoDs",
     "public": true
   }
