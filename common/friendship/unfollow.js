@@ -5,13 +5,13 @@ const createError = require('http-errors');
 module.exports = Friendship => {
 
   /**
-	 * @function follow Follow a client with followingId by followerId client
+	 * @function unfollow Unfollow a client with followingId by followerId client
    * @param {String} followerId String of source user's identifier
 	 * @param {String} followingId String of destination user's identifier
    * @returns {Object} Returns the friendship model in case of successful operation
    * @throws {Error} Throws error if anything happened
 	 */
-  Friendship.follow = async (followerId, followingId) => {
+  Friendship.unfollow = async (followerId, followingId) => {
     // Load client model from friendship model
     let Client = Friendship.app.models.Client;
     // Check if both clients exist with provided followerId and followingId
@@ -26,32 +26,28 @@ module.exports = Friendship => {
         ]
       }
     });
-    // Throw error if there was any friendship model between followerId and followingId
-    // Meaning that client with followerId already has followed a client with followingId
-    if (friendship) {
-      throw createError(400, 'Follower already has followed this Following');
+    // Throw error if there was not any friendship model between followerId and followingId
+    // Meaning that client with followerId has not followed a client with followingId yet
+    if (!friendship) {
+      throw createError(400, 
+        'Follower already has not followed this Following');
     }
-    // Create a friendship model between followerId and followingId at this moment of time
-    let friendshipModel = await Friendship.create({
-      followerId: followerId.toString(),
-      followingId: followingId.toString(),
-      date: utility.getUnixTimeStamp()
-    });
-    // Return the successful friendship object
-    return friendshipModel;
+    // Remove the friendship model between followerId and followingId with friendshipId
+    await Friendship.destroyById(friendship.id.toString());
+    return { status: 200 };
   };
 
   // Wrapp the function inside the Try/Catch
-  Friendship.follow = 
-    utility.wrapper(Friendship.follow);
+  Friendship.unfollow = 
+    utility.wrapper(Friendship.unfollow);
 
 	/**
-	 * remote method signiture for follow a client with provided followingId
+	 * remote method signiture for unfollow a client with provided followingId
    * from a client with provided followerId
 	 */
-  Friendship.remoteMethod('follow', {
+  Friendship.remoteMethod('unfollow', {
     description:
-      'Follow a client with followingId by a client with followerId',
+      'Unfollow a client with followingId by a client with followerId',
     accepts: [{
       arg: 'followerId',
       type: 'string',
@@ -67,7 +63,7 @@ module.exports = Friendship => {
       }
     }],
     http: {
-      path: '/:followerId/follow/:followingId',
+      path: '/:followerId/unfollow/:followingId',
       verb: 'POST',
       status: 200,
       errorStatus: 400
