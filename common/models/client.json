@@ -43,7 +43,18 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "followers": {
+      "type": "hasMany",
+      "model": "friendship",
+      "foreignKey": "followingId"
+    },
+    "followings": {
+      "type": "hasMany",
+      "model": "friendship",
+      "foreignKey": "followerId"
+    }
+  },
   "acls": [],
   "methods": {}
 }
