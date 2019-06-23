@@ -19,7 +19,7 @@ module.exports = Client => {
       randomNumber = utility.generateRandomNumber(11111111, 99999999);
       // Get hash of this random number to make it human unreadable
       randomNumber = 
-        crypto.createHash('md5').update(randomNumber).digest('hex');
+        crypto.createHash('md5').update(randomNumber.toString()).digest('hex');
       // Fetch list of clients based on the provided random number
       clientList = await Client.fetchModelsWithNullOption({ 
         where: { 
