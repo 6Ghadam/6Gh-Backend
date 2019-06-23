@@ -13,6 +13,10 @@
     "followingId": {
       "type": "string",
       "required": true
+    },
+    "date": {
+      "type": "number",
+      "required": false
     }
   },
   "validations": [],
