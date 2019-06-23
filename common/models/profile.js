@@ -1,5 +1,7 @@
 module.exports = async Profile => {
 
+  rootRequire('common/profile/resetDurationalScore')(
+    Profile);
   rootRequire('common/profile/updateBill')(
     Profile);
   rootRequire('common/profile/updateCoin')(
