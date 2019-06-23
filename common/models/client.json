@@ -44,6 +44,16 @@
   },
   "validations": [],
   "relations": {
+    "profile": {
+      "type": "embedsOne",
+      "model": "profile",
+      "property": "profileModel",
+      "options": {
+        "validate": true,
+        "forceId": true,
+        "persistent": true
+      }
+    },
     "followers": {
       "type": "hasMany",
       "model": "friendship",
