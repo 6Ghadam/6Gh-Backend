@@ -1,0 +1,50 @@
+{
+  "name": "client",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "realmRequired": true,
+    "realmDelimiter": ":"
+  },
+  "hidden": [
+    "realm",
+    "emailVerified"
+  ],
+  "mixins": {
+    "Fetcher": {},
+    "Clearer": true
+  },
+  "properties": {
+    "username": {
+      "type": "string",
+      "required": false
+    },
+    "email": {
+      "type": "string",
+      "required": false
+    },
+    "password": {
+      "type": "string",
+      "required": false
+    },
+    "clientAppId": {
+      "type": "string",
+      "required": false
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "isSuspended": {
+      "type": "string",
+      "required": true,
+      "default": "False"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+  ],
+  "methods": {}
+}

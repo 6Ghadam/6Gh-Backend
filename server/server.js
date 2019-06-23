@@ -5,11 +5,11 @@ const { join } = require('path');
 let app = loopback();
 module.exports = app;
 
-let envAttach = require('../helper/envAttach');
-envAttach(app);
-
 global.rootRequire = name => require(join(__dirname, '..', name));
 global.rootPath = join(__dirname, '../');
+
+let envAttach = require('../helper/envAttach');
+envAttach(app);
 
 app.start = function() {
   // start the web server

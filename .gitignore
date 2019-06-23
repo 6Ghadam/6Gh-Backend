@@ -57,3 +57,6 @@ nohup.out
 *.csv
 *.dat
 *.iml
+
+# Scripts
+startScript.sh

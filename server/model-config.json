@@ -12,5 +12,42 @@
       "../common/mixins",
       "./mixins"
     ]
+  },
+  "User": {
+    "dataSource": "mongoDs",
+    "public": true,
+    "acls": [{
+      "principalType": "ROLE",
+      "principalId": "Founder",
+      "permission": "ALLOW",
+      "property": "*"
+    }]
+  },
+  "AccessToken": {
+    "dataSource": "mongoDs",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "mongoDs",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "mongoDs",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "mongoDs",
+    "public": false
+  },
+  "authentication": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "client": {
+    "dataSource": "mongoDs",
+    "public": true
   }
 }
